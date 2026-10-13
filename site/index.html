@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CloudCraft | Cloud & DevOps Portfolio</title>
+  <meta name="description" content="Portfolio of a Cloud & DevOps learner: static hosting, CI/CD, containers, Kubernetes and infrastructure as code.">
+  <meta name="theme-color" content="#0b5fff">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta property="og:title" content="CloudCraft | Cloud & DevOps Portfolio">
+  <meta property="og:description" content="Static website deployed with GitHub Pages, monitored with uptime checks and Lighthouse.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="header">
+    <div class="container nav">
+      <a href="#home" class="brand" aria-label="CloudCraft home"><span class="logo">&#9729;</span> CloudCraft</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">&#9776;</button>
+      <nav id="navLinks" class="links" aria-label="Main">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#pipeline">Pipeline</a>
+        <a href="#contact">Contact</a>
+        <button id="themeBtn" class="icon-btn" aria-label="Toggle dark mode">Theme</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Cloud Computing &amp; DevOps</p>
+          <h1>Hi, I'm <span class="grad">YOUR NAME</span>.<br>I deploy things to the cloud.</h1>
+          <p class="lead">This site is itself the project: a static website built with HTML, CSS and JavaScript, hosted on GitHub Pages, served over HTTPS and monitored continuously for uptime and performance.</p>
+          <div class="cta">
+            <a class="btn primary" href="#projects">View projects</a>
+            <a class="btn" href="#contact">Get in touch</a>
+          </div>
+        </div>
+        <div class="card status" aria-live="polite">
+          <h2>Live deployment status</h2>
+          <ul>
+            <li><span class="dot ok"></span> Hosting: GitHub Pages</li>
+            <li><span class="dot ok"></span> HTTPS: enforced</li>
+            <li><span class="dot ok"></span> CI/CD: GitHub Actions</li>
+            <li><span class="dot ok"></span> Monitoring: uptime + Lighthouse</li>
+          </ul>
+          <p class="muted small">Page loaded in <strong id="loadTime">...</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container narrow reveal">
+        <h2>About</h2>
+        <p>I am a Cloud &amp; DevOps learner at Cognevance Technologies. I enjoy automating deployments and building reliable, observable systems. This portfolio documents the practical projects I complete during the programme.</p>
+      </div>
+    </section>
+
+    <section id="skills" class="section alt">
+      <div class="container">
+        <h2 class="center">Skills</h2>
+        <div class="grid">
+          <article class="card reveal"><h3>Cloud</h3><p>AWS (S3, EC2, EKS, IAM), Netlify, GitHub Pages</p></article>
+          <article class="card reveal"><h3>CI/CD</h3><p>GitHub Actions, Jenkins, Docker Hub</p></article>
+          <article class="card reveal"><h3>Containers</h3><p>Docker, Docker Compose, Kubernetes</p></article>
+          <article class="card reveal"><h3>IaC &amp; Monitoring</h3><p>Terraform, Prometheus, Grafana, Lighthouse</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="center">Projects</h2>
+        <div class="grid three">
+          <article class="card reveal"><span class="tag">Level 1</span><h3>Static Website Deployment</h3><p>This site: GitHub Pages hosting, custom domain, HTTPS, uptime and performance monitoring.</p></article>
+          <article class="card reveal"><span class="tag">Level 2</span><h3>CI/CD Pipeline Automation</h3><p>Automated build, test and Docker deployment with GitHub Actions and Docker Hub.</p></article>
+          <article class="card reveal"><span class="tag">Level 3</span><h3>Enterprise DevOps Infrastructure</h3><p>Terraform, EKS, Prometheus and Grafana with backup and disaster recovery.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pipeline" class="section alt">
+      <div class="container narrow">
+        <h2 class="center">How this site is delivered</h2>
+        <ol class="steps">
+          <li><strong>Commit</strong><span>Code is pushed to GitHub (feature branch, then pull request).</span></li>
+          <li><strong>Validate</strong><span>GitHub Actions lints the HTML and checks required files.</span></li>
+          <li><strong>Deploy</strong><span>The <code>site/</code> folder is published to GitHub Pages.</span></li>
+          <li><strong>Monitor</strong><span>Scheduled uptime checks and Lighthouse audits track health.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container narrow">
+        <h2 class="center">Contact</h2>
+        <form id="contactForm" class="card form" novalidate>
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required minlength="2">
+          <p class="err" data-for="name"></p>
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+          <p class="err" data-for="email"></p>
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" required minlength="10"></textarea>
+          <p class="err" data-for="message"></p>
+
+          <button class="btn primary" type="submit">Send message</button>
+          <p id="formStatus" class="muted" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="year">2026</span> YOUR NAME. Built for Cognevance Technologies Cloud &amp; DevOps Level 1.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

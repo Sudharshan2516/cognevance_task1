@@ -1,0 +1,19 @@
+name: Lighthouse Performance Audit
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 1"   # weekly, Monday 03:00 UTC
+  push:
+    branches: [main]
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true

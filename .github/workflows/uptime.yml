@@ -1,0 +1,33 @@
+name: Uptime Monitor
+
+# Runs every 15 minutes. A failed run sends GitHub's failure notification email.
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check site availability and response time
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: |
+          if [ -z "$SITE_URL" ]; then echo "Set repository variable SITE_URL (Settings > Variables)"; exit 1; fi
+          out=$(curl -s -o /dev/null -L --max-time 15 -w "%{http_code} %{time_total} %{time_connect} %{time_starttransfer} %{ssl_verify_result}" "$SITE_URL")
+          set -- $out
+          echo "HTTP status      : $1"
+          echo "Total time (s)   : $2"
+          echo "Connect time (s) : $3"
+          echo "TTFB (s)         : $4"
+          echo "TLS verify (0=ok): $5"
+          [ "$1" = "200" ] || { echo "::error::Site returned HTTP $1"; exit 1; }
+          [ "$5" = "0" ]   || { echo "::error::TLS verification failed"; exit 1; }
+          awk -v t="$2" 'BEGIN{ if (t > 3.0) { print "::error::Response time above 3s threshold"; exit 1 } }'
+      - name: Check security headers
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: |
+          curl -sI -L "$SITE_URL" | tee headers.txt
+          grep -qi "strict-transport-security" headers.txt && echo "HSTS present" || echo "::warning::HSTS header not present"
